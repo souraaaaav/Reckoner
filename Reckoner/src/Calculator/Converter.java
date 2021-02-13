@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import java.util.regex.*;
 
 public class Converter extends Frame_Templete {
 
@@ -104,8 +105,21 @@ public class Converter extends Frame_Templete {
 
                 if (display.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Enter value");
+
                 }
                 else {
+
+                    if(checkDisplay()==true)
+                        {
+                            JOptionPane.showMessageDialog(null,"your input is invalid");
+                            display.setText("");
+                            result.setText("");
+                            result.setEnabled(false);
+
+                        }
+                        
+                    else{
+
                     try {
 
                         int from_value = combo1.getSelectedIndex();
@@ -282,7 +296,19 @@ public class Converter extends Frame_Templete {
                         result.setEnabled(false);
                     }
                 }
+                }
             }
         });
+    }
+    boolean checkDisplay(){
+
+        String inputString = display.getText();
+        Pattern pattern = Pattern.compile("^[+]?[0-9]*(?:\\.[0-9]*)?$");
+        Matcher matcher = pattern.matcher(inputString);
+        boolean isStringContainsSpecialCharacter = matcher.find();
+        if (isStringContainsSpecialCharacter)
+            return false;
+        else
+            return true;
     }
 }
