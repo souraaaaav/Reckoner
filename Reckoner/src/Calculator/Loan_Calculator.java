@@ -99,12 +99,51 @@ public class Loan_Calculator extends Frame_Templete{
                 }
 
                 else {
-                    if(checkPointMonth()==true){
-                        JOptionPane.showMessageDialog(null, "Month can't have decimal dot");
+                    if(checkMonth()==true && checkLoan()==false && checkInterest()==false){
+                        JOptionPane.showMessageDialog(null, "Month input is invalid");
                         monthtext.setText("");
                         totaltext.setText("");
                         paymenttext.setText("");
                     }
+
+                    else if(checkMonth()==false && checkLoan()==true && checkInterest()==false){
+                        JOptionPane.showMessageDialog(null, "Loan input is invalid");
+                        amounttext.setText("");
+                        totaltext.setText("");
+                        paymenttext.setText("");
+                    }
+
+                    else if(checkMonth()==false && checkLoan()==false && checkInterest()==true){
+                        JOptionPane.showMessageDialog(null, "Interest input is invalid");
+                        interesttext.setText("");
+                        totaltext.setText("");
+                        paymenttext.setText("");
+                    }
+
+                    else if(checkMonth()==true && checkLoan()==true && checkInterest()==false){
+                        JOptionPane.showMessageDialog(null, "Loan & Month input is invalid");
+                        monthtext.setText("");
+                        amounttext.setText("");
+                        totaltext.setText("");
+                        paymenttext.setText("");
+                    }
+
+                    else if(checkMonth()==true && checkLoan()==false && checkInterest()==true){
+                        JOptionPane.showMessageDialog(null, "Interest & Month input is invalid");
+                        monthtext.setText("");
+                        interesttext.setText("");
+                        totaltext.setText("");
+                        paymenttext.setText("");
+                    }
+
+                    else if(checkMonth()==false && checkLoan()==true && checkInterest()==true){
+                        JOptionPane.showMessageDialog(null, "Loan & Interest input is invalid");
+                        amounttext.setText("");
+                        interesttext.setText("");
+                        totaltext.setText("");
+                        paymenttext.setText("");
+                    }
+
                     else{
                         try {
                             double totalamount = 0;
@@ -161,14 +200,39 @@ public class Loan_Calculator extends Frame_Templete{
         });
     }
 
-    boolean checkPointMonth(){
+    boolean checkMonth(){
         String inputString = monthtext.getText();
-        Pattern pattern = Pattern.compile("\\.");
+        Pattern pattern = Pattern.compile("^[0-9]+$");
         Matcher matcher = pattern.matcher(inputString);
         boolean isStringContainsSpecialCharacter = matcher.find();
         if (isStringContainsSpecialCharacter)
-            return true;
-        else
             return false;
+        else
+            return true;
+    }
+
+    boolean checkLoan(){
+
+        String inputString = amounttext.getText();
+        Pattern pattern = Pattern.compile("^[+]?[0-9]*(?:\\.[0-9]*)?$");
+        Matcher matcher = pattern.matcher(inputString);
+        boolean isStringContainsSpecialCharacter = matcher.find();
+        if (isStringContainsSpecialCharacter)
+            return false;
+        else
+            return true;
+    }
+
+    
+    boolean checkInterest(){
+
+        String inputString = interesttext.getText();
+        Pattern pattern = Pattern.compile("^[+]?[0-9]*(?:\\.[0-9]*)?$");
+        Matcher matcher = pattern.matcher(inputString);
+        boolean isStringContainsSpecialCharacter = matcher.find();
+        if (isStringContainsSpecialCharacter)
+            return false;
+        else
+            return true;
     }
 }

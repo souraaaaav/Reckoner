@@ -95,28 +95,28 @@ public class BMI extends Frame_Templete {
                 else{
 
                     if(checkPointWeight()==true && checkPointHeightInch()==false && checkPointHeightFoot()==false){
-                        JOptionPane.showMessageDialog(null,"Weight input is not valid");
+                        JOptionPane.showMessageDialog(null,"Weight input is invalid");
                         weighttext.setText("");
                         bmitext.setText("");
                         conditiontext.setText("");
                     }
 
                     else if(checkPointHeightFoot()==true && checkPointHeightInch()==false && checkPointWeight()==false){
-                        JOptionPane.showMessageDialog(null,"Height foot can't have decimal point");
+                        JOptionPane.showMessageDialog(null,"Height foot input is invalid");
                         heightfoot.setText("");
                         bmitext.setText("");
                         conditiontext.setText("");
                     }
 
                     else if(checkPointHeightInch()==true && checkPointHeightFoot()==false && checkPointWeight()==false){
-                        JOptionPane.showMessageDialog(null,"Height inch can't have decimal point");
+                        JOptionPane.showMessageDialog(null,"Height inch input is invalid");
                         heightinch.setText("");
                         bmitext.setText("");
                         conditiontext.setText("");
                     }
 
                     else if(checkPointHeightInch()==true && checkPointHeightFoot()==true && checkPointWeight()==false){
-                        JOptionPane.showMessageDialog(null,"Height foot & inch can't have decimal point");
+                        JOptionPane.showMessageDialog(null,"Height foot & inch input is invalid");
                         heightinch.setText("");
                         heightfoot.setText("");
                         bmitext.setText("");
@@ -124,7 +124,7 @@ public class BMI extends Frame_Templete {
                     }
 
                     else if(checkPointHeightInch()==true && checkPointHeightFoot()==false && checkPointWeight()==true){
-                        JOptionPane.showMessageDialog(null,"Weight & height inch input is not valid");
+                        JOptionPane.showMessageDialog(null,"Weight & height inch input is invalid");
                         heightinch.setText("");
                         weighttext.setText("");
                         bmitext.setText("");
@@ -132,7 +132,7 @@ public class BMI extends Frame_Templete {
                     }
 
                     else if(checkPointHeightInch()==false && checkPointHeightFoot()==true && checkPointWeight()==true){
-                        JOptionPane.showMessageDialog(null,"Weight & height foot input is not valid");
+                        JOptionPane.showMessageDialog(null,"Weight & height foot input is invalid");
                         heightfoot.setText("");
                         weighttext.setText("");
                         bmitext.setText("");
@@ -266,34 +266,34 @@ public class BMI extends Frame_Templete {
     boolean checkPointHeightFoot(){
 
         String inputString = heightfoot.getText();
-        Pattern pattern = Pattern.compile("\\.");
+        Pattern pattern = Pattern.compile("^[0-9]+$");
         Matcher matcher = pattern.matcher(inputString);
 
         boolean isStringContainsSpecialCharacter = matcher.find();
 
         if (isStringContainsSpecialCharacter)
-            return true;
-        else
             return false;
+        else
+            return true;
     }
 
     boolean checkPointHeightInch(){
 
         String inputString = heightinch.getText();
-        Pattern pattern = Pattern.compile("\\.");
+        Pattern pattern = Pattern.compile("^[0-9]+$");
         Matcher matcher = pattern.matcher(inputString);
 
         boolean isStringContainsSpecialCharacter = matcher.find();
 
         if (isStringContainsSpecialCharacter)
-            return true;
-        else
             return false;
+        else
+            return true;
     }
     boolean checkPointWeight(){
 
         String inputString = weighttext.getText();
-        Pattern pattern = Pattern.compile("^-?(0|[1-9]\\d*)(\\.\\d+)?$");
+        Pattern pattern = Pattern.compile("^[+]?[0-9]*(?:\\.[0-9]*)?$");
         Matcher matcher = pattern.matcher(inputString);
         boolean isStringContainsSpecialCharacter = matcher.find();
         if (isStringContainsSpecialCharacter)
